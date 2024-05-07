@@ -1,12 +1,29 @@
+import { useState, useEffect } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap";
 
-import {navLinks} from '../data/index';
+import { navLinks } from '../data/index';
 import { NavLink } from "react-router-dom";
 
 const NavbarComponent = () => {
+  const [changeColor, setChangeColor ] = useState (false);
+
+  const changeBackgorundColor = () => {
+    if (window.scrollY > 10) {
+      setChangeColor(true);
+    } else {
+      setChangeColor(false);
+    }
+  };
+
+  useEffect (() => {
+    changeBackgorundColor();
+
+    window.addEventListener("scroll", changeBackgorundColor);
+  });
+
   return (
     <div>
-            <Navbar expand="lg">
+            <Navbar expand="lg" className={changeColor ? "color-active" : ""}>
       <Container>
         <Navbar.Brand href="#home" className="fs-3 fw-bold">Ngoding.</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
